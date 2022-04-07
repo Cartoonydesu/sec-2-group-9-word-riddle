@@ -1,5 +1,6 @@
 <script setup>
     import {ref, computed} from 'vue'
+    
     defineEmits(['reset'])
     const props = defineProps({
         words:{

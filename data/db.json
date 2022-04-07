@@ -1,9 +1,9 @@
 {
   "words": [
     {
-      "id": 1,
       "word": "house",
-      "hint": "A place where you live"
+      "hint": "A place where you lives",
+      "id": 1
     },
     {
       "id": 2,
