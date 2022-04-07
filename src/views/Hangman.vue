@@ -13,13 +13,6 @@
         arrayOfWord.value = randomWord.value.word.split('')
         console.log(arrayOfWord.value)
     })
-
-
-
-    
-
-
-
 </script>
  
 <template>
@@ -33,9 +26,6 @@
         @reset="reset"
         @clickLetter="clickLetter"
     />
-
-    
-
 </template>
  
 <style>

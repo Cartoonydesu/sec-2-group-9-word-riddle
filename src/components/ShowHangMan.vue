@@ -18,17 +18,17 @@
 
     // Part picture----------------
     const images = [
-        '../public/hangmans/hangman-0.png',
-        '../public/hangmans/hangman-1.png',
-        '../public/hangmans/hangman-2.png',
-        '../public/hangmans/hangman-3.png',
-        '../public/hangmans/hangman-4.png',
-        '../public/hangmans/hangman-5.png',
-        '../public/hangmans/hangman-6.png',
-        '../public/hangmans/hangman-7.png',
-        '../public/hangmans/hangman-8.png',
-        '../public/hangmans/hangman-9.png',
-        '../public/hangmans/hangman-10.png',
+        '/hangmans/hangman-0.png',
+        '/hangmans/hangman-1.png',
+        '/hangmans/hangman-2.png',
+        '/hangmans/hangman-3.png',
+        '/hangmans/hangman-4.png',
+        '/hangmans/hangman-5.png',
+        '/hangmans/hangman-6.png',
+        '/hangmans/hangman-7.png',
+        '/hangmans/hangman-8.png',
+        '/hangmans/hangman-9.png',
+        '/hangmans/hangman-10.png',
     ]
 
     // Part Game-------------------
@@ -94,10 +94,7 @@
         // }
         
     }
-
 </script>
-
-
 
 <template>
 
@@ -149,12 +146,9 @@
         <button v-show="showHint" @click="showHintBox = true">Hint</button>
         <span v-show="showHintBox">{{ words.hint}}</span>
         <button @click="reset">Reset</button>
-    
     </div>
 
-
 </template>
-
 
 
 <style>

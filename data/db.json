@@ -2,7 +2,7 @@
   "words": [
     {
       "word": "house",
-      "hint": "A place where you lives",
+      "hint": "A place where you live",
       "id": 1
     },
     {
@@ -26,9 +26,9 @@
       "hint": "A vehicla that can fly"
     },
     {
-      "id": 7,
       "word": "thailand",
-      "hint": "Siam, Land of smile"
+      "hint": "Siam, Land of smiles",
+      "id": 7
     },
     {
       "id": 8,
@@ -146,7 +146,54 @@
       "hint": "A name of the flower, mostly pink"
     },
     {
-      "id": 31
+      "id": 31,
+      "word": "alphabet",
+      "hint": "An English text character"
+    },
+    {
+      "id": 32,
+      "word": "medicine",
+      "hint": "A thing you have to eat when you fell ill"
+    },
+    {
+      "id": 33,
+      "word": "mirror",
+      "hint": "A thing you can look at yourselves"
+    },
+    {
+      "id": 34,
+      "word": "scarf",
+      "hint": "A cloth that wrapped around neck"
+    },
+    {
+      "id": 35,
+      "word": "lipstick",
+      "hint": "A cosmetic that wear on the lips"
+    },
+    {
+      "id": 36,
+      "word": "pancake",
+      "hint": "A sweet that make of flour. Mostly known in a thin circle shape"
+    },
+    {
+      "id": 37,
+      "word": "baguette",
+      "hint": "A french breadacter"
+    },
+    {
+      "id": 38,
+      "word": "present",
+      "hint": "A thing you give away or receive in a celebration"
+    },
+    {
+      "id": 39,
+      "word": "glasses",
+      "hint": "An accessories, mainly for people with problem with sight"
+    },
+    {
+      "id": 40,
+      "word": "glue",
+      "hint": "A liquid used to stick two things together"
     }
   ]
 }

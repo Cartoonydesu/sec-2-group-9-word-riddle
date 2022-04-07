@@ -1,6 +1,6 @@
 <script setup>
     import { useWords } from '../stores/listAllWords.js'
-    import ShowScabbleWord from '../components/ShowScabbleWord.vue'
+    import ShowScrabbleWord from '../components/ShowScrabbleWord.vue'
     const store = useWords()
 //     const randomWord = () => {
 //     return store[Math.floor(Math.random() * store.length)]

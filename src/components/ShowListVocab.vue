@@ -1,8 +1,7 @@
 <script setup>
     import {ref,computed} from 'vue'
-    
-    defineEmits(['create','delete','update','searching'])
-    defineProps({
+    defineEmits(['create','delete','edit','showHideModal','update','searching'])
+    const props = defineProps({
         listWords:{
         type: Object,
         require: true
@@ -10,39 +9,57 @@
         newWord:{
         type: Object,
         defualt:{word:"",hint:""}
+        },
+        editingWord:{
+        type: Object,
+        defualt:{word:"",hint:""}
+        },
+        modalShow:{
+        type: Boolean,
+        require: true
+        }
+        ,
+        keywords:{
+        type: String,
+        require: true
+        },
+        setWordSearch:{
+        type: Array,
+        require:true
         }
         // ,
-        // keywords:{
-        // type: String,
-        // require: true
-        // },
-        // setWordSearch:{
-        // type: Array,
-        // defualt:""
+        // searchingMode:{
+        // type: Boolean,
+        // require: true    
         // }
     })
-    const editingWord = ref("")
-    const modalShow = ref(false)
-    const edit = (word)=>{
-        showHideModal()
-        editingWord.value = {...word}
-    }
-    const showHideModal = () => modalShow.value===true ? modalShow.value = false : modalShow.value = true
-
-const keywords = ref("")
-const setWordSearch = ref([])
-const searching = computed(async () => {    
-  if(keywords.value.length !== 0){
-    const res = await fetch(`http://localhost:5000/words?q=${keywords.value}`)
-    if (res.status === 200) {
-        setWordSearch.value = await res.json()
-        console.log(setWordSearch.value)
-    } else console.log('error, cannot searching')
-  }else{
-    setWordSearch.value = []
-  }
-  return setWordSearch.value
-})
+    
+    // const editingWord = ref("")
+    // const modalShow = ref(false)
+    // const edit = (word)=>{
+    //     showHideModal()
+    //     editingWord.value = {...word}
+    // }
+    // const showHideModal = () => modalShow.value===true ? modalShow.value = false : modalShow.value = true
+    
+    const searchingMode = computed(()=>{
+        return props.keywords.length !== 0 ? true : false
+    })
+    
+// const keywords = ref("")
+// const setWordSearch = ref([])
+// const searching = computed(async () => {    
+//   if(keywords.value.length !== 0){
+//     const res = await fetch(`http://localhost:5000/words?q=${keywords.value}`)
+//     if (res.status === 200) {
+//         setWordSearch.value = await res.json()
+//         console.log(setWordSearch.value)
+//     } else console.log('error, cannot searching')
+//   }else{
+//     setWordSearch.value = []
+//   }
+//   return setWordSearch.value
+// })
 </script>
  
 <template>
@@ -59,8 +76,7 @@ const searching = computed(async () => {
     <div>
         <b>Searching</b><br>
         <input type="text" id="hint" name="hint" v-model="keywords">
-        <!-- <button @click="$emit('searching',keywords)">Search</button> -->
-        <button @click="searching()">Search</button>
+        <button @click="$emit('searching',keywords,searchingMode)">Search</button>
     </div>
    <br><hr>
 
@@ -69,22 +85,24 @@ const searching = computed(async () => {
         <tr>
             <th>Word</th><th>Hint</th><th></th>
         </tr>
-        <tr v-for="(word,index) in listWords" :key="index" v-if="(keywords.length==0)">
+        <tr v-for="(word,index) in listWords" :key="index" v-if="searchingMode===false">
             <td>{{word.word}}</td>
             <td>{{word.hint}}</td>
             <td>
-                <button @click="edit(word)">Edit</button>
+                <!-- <button @click="edit(word)">Edit</button> -->
+                <button @click="$emit('edit',word)">Edit</button>
                 <button @click="$emit('delete',word.id)">Delete</button>
             </td>
         </tr>
-        <tr v-for="word in setWordSearch" v-else>
+        <tr v-for="word in setWordSearch" v-else="searchingMode===true">
             <td>{{word.word}}</td>
             <td>{{word.hint}}</td>
             <td>
-                <button @click="edit(word)">Edit</button>
+                <button @click="$emit('edit',word)">Edit</button>
                 <button @click="$emit('delete',word.id)">Delete</button>
             </td>
         </tr>
+        
     </table>
     </center>
 
@@ -92,7 +110,7 @@ const searching = computed(async () => {
     <div class="modal-wrapper">
     <!-- Modal content -->
     <div class="modal-container">
-        <span class="close" @click="showHideModal()">&times;</span>
+        <span class="close" @click="$emit('showHideModal')">&times;</span>
         <div class="modal-header"><h3>Edit Word</h3></div>
         <div class="modal-body">
             <label for="editWord">word:</label>
@@ -102,8 +120,8 @@ const searching = computed(async () => {
             <input type="text" id="editHint" name="editHint" v-model="editingWord.hint"> 
         </div>
         <div class="modal-button">
-            <button @click="$emit('update',editingWord,showHideModal)">Save</button>
-            <button @click="showHideModal()">Cancel</button>
+            <button @click="$emit('update',editingWord)">Save</button>
+            <button @click="$emit('showHideModal')">Cancel</button>
         </div>
     </div>
     </div>

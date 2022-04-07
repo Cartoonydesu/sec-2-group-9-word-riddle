@@ -4,7 +4,7 @@ import Vocab from '../views/Vocab.vue'
 import EditWord from '../views/EditWord.vue'
 import AboutUs from '../views/AboutUs.vue'
 import Hangman from '../views/Hangman.vue'
-import ScabbleWord from '../views/ScabbleWord.vue'
+import ScrabbleWord from '../views/ScrabbleWord.vue'
 import NotFound from '../views/NotFound.vue'
 
 const history = createWebHistory()
@@ -31,9 +31,9 @@ const routes = [
         component: Hangman
     },
     {
-        path:'/scabble-word',
-        name: 'ScabbleWord',
-        component: ScabbleWord
+        path:'/scrabble-word',
+        name: 'ScrabbleWord',
+        component: ScrabbleWord
     },
     {
         path:'/vocab/:wordId',

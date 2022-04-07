@@ -6,7 +6,7 @@
     <h2>Mini Games</h2>
     <div>
         <router-link :to="{name:'Hangman'}">Hangman</router-link> | 
-        <router-link :to="{name:'ScabbleWord'}">ScabbleWord</router-link>
+        <router-link :to="{name:'ScrabbleWord'}">ScabbleWord</router-link>
     </div>
 </template>
  
