@@ -32,6 +32,7 @@
         text-align: center;
         line-height: 30px;
         margin-top: 7em;
+        margin-left: 0;
     }
     .navbar {
         overflow: auto;
@@ -48,9 +49,10 @@
         display: block;
         color: #6667ad;
         text-align: center;
-        padding: 0px 30px;
+        padding: 10px 30px;
         text-decoration: none;
         font-family: 'Black Ops One', cursive;
+        margin: 0;
     }
     .navbar p:hover:not(.active) {
         background-color: #6667ad;
@@ -68,7 +70,7 @@
         border-radius: 10px;
         box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
         padding: 10px;
-        margin: 4px;
+        margin: 0px;
         border: 3px #000;
     }
     button:hover:not([disabled]) {
@@ -80,5 +82,12 @@
         background-color: #ffcf73;
         color: black;
         transition-duration: .2s;
+    }
+    a {
+        color: black;
+        text-decoration: none;
+    }
+    .router-link-active {
+        color: #6667ad
     }
 </style>

@@ -107,7 +107,6 @@ const edit = (word)=>{
       :modalShow="modalShow"
       :keywords="keywords"
       :setWordSearch="setWordSearch"
- 
       @create="addNewWord"
       @delete="removeWord"
       @edit="edit"
