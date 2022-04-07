@@ -1,7 +1,7 @@
 <script setup>
-    import {ref} from 'vue'
+    import {ref,computed} from 'vue'
     
-    defineEmits(['create','delete','update'])
+    defineEmits(['create','delete','update','searching'])
     defineProps({
         listWords:{
         type: Object,
@@ -9,8 +9,17 @@
         },
         newWord:{
         type: Object,
-        require: true
+        defualt:{word:"",hint:""}
         }
+        // ,
+        // keywords:{
+        // type: String,
+        // require: true
+        // },
+        // setWordSearch:{
+        // type: Array,
+        // defualt:""
+        // }
     })
     const editingWord = ref("")
     const modalShow = ref(false)
@@ -18,16 +27,22 @@
         showHideModal()
         editingWord.value = {...word}
     }
-const showHideModal = () => modalShow.value===true ? modalShow.value = false : modalShow.value = true
+    const showHideModal = () => modalShow.value===true ? modalShow.value = false : modalShow.value = true
 
 const keywords = ref("")
-const searching = async (keyword) => {    
-const res = await fetch(`http://localhost:5000/words?q=${keyword}`)
+const setWordSearch = ref([])
+const searching = computed(async () => {    
+  if(keywords.value.length !== 0){
+    const res = await fetch(`http://localhost:5000/words?q=${keywords.value}`)
     if (res.status === 200) {
-        notes.value = await res.json()
-        console.log(notes.value)
-    } else console.log('error, cannot get notes')
-}
+        setWordSearch.value = await res.json()
+        console.log(setWordSearch.value)
+    } else console.log('error, cannot searching')
+  }else{
+    setWordSearch.value = []
+  }
+  return setWordSearch.value
+})
 </script>
  
 <template>
@@ -35,25 +50,34 @@ const res = await fetch(`http://localhost:5000/words?q=${keyword}`)
     <div>
         <b>Add new Word</b><br>
         <label for="word">word: </label>
-        <input type="text" id="word" name="word" v-model="newWord.word">  |  
-        <label for="hint">hint: </label>
+        <input type="text" id="word" name="word" v-model="newWord.word">
+        <label for="hint"> hint: </label>
         <input type="text" id="hint" name="hint" v-model="newWord.hint"> 
         <button @click="$emit('create',newWord)">Add</button>
     </div>
     <br>
     <div>
         <b>Searching</b><br>
-        <input type="text" id="hint" name="hint" v-model="keywords">  |  
-        <button @click="searching(keywords)">Search</button>
+        <input type="text" id="hint" name="hint" v-model="keywords">
+        <!-- <button @click="$emit('searching',keywords)">Search</button> -->
+        <button @click="searching()">Search</button>
     </div>
    <br><hr>
 
-   <center>
+    <center>
     <table id="vocabs">
         <tr>
             <th>Word</th><th>Hint</th><th></th>
         </tr>
-        <tr v-for="(word,index) in listWords" :key="index">
+        <tr v-for="(word,index) in listWords" :key="index" v-if="(keywords.length==0)">
+            <td>{{word.word}}</td>
+            <td>{{word.hint}}</td>
+            <td>
+                <button @click="edit(word)">Edit</button>
+                <button @click="$emit('delete',word.id)">Delete</button>
+            </td>
+        </tr>
+        <tr v-for="word in setWordSearch" v-else>
             <td>{{word.word}}</td>
             <td>{{word.hint}}</td>
             <td>
@@ -91,30 +115,30 @@ const res = await fetch(`http://localhost:5000/words?q=${keyword}`)
 
     /* ------table-------*/
     #vocabs {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 75%;
+        font-family: 'Itim', cursive;
+        border-collapse: collapse;
+        width: 75%;
     }
 
     #vocabs td, #vocabs th {
-    border: 1px solid #ddd;
-    padding: 0px 10px;
+        border: 1px solid #ddd;
+        padding: 0px 10px;
     }
 
     #vocabs tr:nth-child(even){background-color: #e0e1ee;}
     #vocabs tr:nth-child(odd){background-color: #ffffff;}
 
     #vocabs tr:hover:not([disabled]) {
-            background-color: #f4ecc2;
+            background-color: #fff7ce;
             color: black;
-        }
+    }
 
     #vocabs th {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: left;
-    background-color: #6667ab;
-    color: white;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: left;
+        background-color: #6667ab;
+        color: white;
     }
                                                                                                                                             
     /* The Modal (background) */

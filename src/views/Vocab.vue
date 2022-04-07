@@ -4,12 +4,11 @@
   import { ref } from 'vue'
   
   const store = useWords()
-  const listAllWord = ref()
 
   //CREATE
   const createWord = ref({})
   const addNewWord = async (newWord)=>{
-    const res = await fetch(' http://localhost:5000/words',{
+      const res = await fetch(' http://localhost:5000/words',{
       method:'POST',
       headers:{
         'content-type':'application/json'
@@ -23,7 +22,7 @@
     }else {
       console.log('error, cannot create')
     }
-    createWord.value = {}
+      createWord.value = {} 
   } 
 
   //DELETE
@@ -59,11 +58,27 @@
       store.getWords()
       console.log('edited successfully')
     }else {
-      console.log('error, cannot edit')
+      console.log('error, cannot update')
     }
     showHideModal()
   }
-  
+
+//SEARCHING
+// const keywords = ref("")
+// const setWordSearch = ref([])
+// const searching = async (keyword) => {    
+//   if(keyword.length !== 0){
+//     const res = await fetch(`http://localhost:5000/words?q=${keyword}`)
+//     if (res.status === 200) {
+//         setWordSearch.value = await res.json()
+//         keywords.value=keyword
+//         console.log(setWordSearch.value)
+//     } else console.log('error, cannot searching')
+//   }else{
+//     setWordSearch.value = []
+//   }
+// }
+
 </script>
  
 <template>
@@ -75,6 +90,17 @@
       @delete="removeWord"
       @update="saveWord"
   />
+  <!-- <ShowListVocabVue 
+      :listWords="store.listWords"
+      :newWord="createWord"
+      :keywords="keywords"
+      :setWordSearch="setWordSearch"
+    
+      @create="addNewWord"
+      @delete="removeWord"
+      @update="saveWord"
+      @searching="searching"
+  /> -->
 </template>
  
 <style>

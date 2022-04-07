@@ -9,24 +9,26 @@ onMounted(async () => {
 </script>
 
 <template>
-<div>
-    <h1>~~ Word Riddle ~~</h1>
     <div>
-        <router-link :to="{name:'Home'}">Home</router-link> | 
-        <router-link :to="{name:'Vocab'}">Vocab</router-link> | 
-        <router-link :to="{name:'AboutUs'}">About Us</router-link>
+        <ul>
+            <li><router-link :to="{name:'AboutUs'}">About Us</router-link></li>
+            <li><router-link :to="{name:'Vocab'}">Vocab</router-link></li>
+            <li><router-link :to="{name:'Home'}">Home</router-link></li>
+        </ul>
+        <h1>~~ Word Riddle ~~</h1>
+        <div>
+            <router-view></router-view>
+        </div>
     </div>
-    <div>
-        <router-view></router-view>
-    </div>
-</div>
 </template>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Shojumaru&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
     h1 {
-        font-family: 'Press Start 2P', cursive;
+        font-family: 'Shojumaru', cursive;
+        font-size: 3em;
         color: #6667ad;
     }
     h2 {
@@ -34,6 +36,7 @@ onMounted(async () => {
         color: black;
     }
     body {
+        font-family: 'Itim', cursive;
         padding: 2em;
         margin: 2em;
         background-color: #ffe9ce;
@@ -41,6 +44,7 @@ onMounted(async () => {
         line-height: 30px;
     }
     button {
+        font-family: 'Itim', cursive;
         background-color: #f8c1cc;
         border-radius: 10px;
         padding: 10px;
@@ -57,8 +61,26 @@ onMounted(async () => {
         color: black;
         transition-duration: 2s;
     }
-    router-rink {
-        color: #6667ad;
+    ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f8c1cc;
+    }
+    li {
+    float: right;
+    }
+    li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+    background-color: #111;
     }
 
 /* #f7 */
