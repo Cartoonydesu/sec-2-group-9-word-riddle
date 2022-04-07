@@ -29,8 +29,7 @@
       console.log('error, cannot create')
     }
       createWord.value = {} 
-  } 
-
+  }
   //DELETE
   const removeWord = async (wordId)=>{
     if (confirm("Are you sure you want to delete this word?") == true) {

@@ -27,39 +27,12 @@
         type: Array,
         require:true
         }
-        // ,
-        // searchingMode:{
-        // type: Boolean,
-        // require: true    
-        // }
     })
-    
-    // const editingWord = ref("")
-    // const modalShow = ref(false)
-    // const edit = (word)=>{
-    //     showHideModal()
-    //     editingWord.value = {...word}
-    // }
-    // const showHideModal = () => modalShow.value===true ? modalShow.value = false : modalShow.value = true
     
     const searchingMode = computed(()=>{
         return props.keywords.length !== 0 ? true : false
     })
     
-// const keywords = ref("")
-// const setWordSearch = ref([])
-// const searching = computed(async () => {    
-//   if(keywords.value.length !== 0){
-//     const res = await fetch(`http://localhost:5000/words?q=${keywords.value}`)
-//     if (res.status === 200) {
-//         setWordSearch.value = await res.json()
-//         console.log(setWordSearch.value)
-//     } else console.log('error, cannot searching')
-//   }else{
-//     setWordSearch.value = []
-//   }
-//   return setWordSearch.value
-// })
 </script>
  
 <template>
@@ -129,7 +102,7 @@
 
 </template>
  
-<style>
+<style scoped>
 
     /* ------table-------*/
     #vocabs {

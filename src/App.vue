@@ -1,7 +1,4 @@
 <script setup>
-import { useWords } from './stores/listAllWords.js'
-import { onMounted } from 'vue'
-
 </script>
 
 <template>
