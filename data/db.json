@@ -21,9 +21,9 @@
       "hint": "Name of a fish"
     },
     {
-      "id": 6,
       "word": "plane",
-      "hint": "A vehicla that can fly"
+      "hint": "A vehicla that can fly",
+      "id": 6
     },
     {
       "word": "thailand",

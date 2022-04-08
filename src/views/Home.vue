@@ -23,14 +23,11 @@
   margin: auto 30%;
   display: grid;
   grid-template-columns: auto auto;
-  /* background-color: #2196F3; */
   padding: 5px;
   column-gap: 20px;
   row-gap: 20px;
 }
 .grid-item {
-  /* background-color: rgba(255, 255, 255, 0.8); */
-  /* padding: 20px; */
   text-align: center;
 }
 img:hover{
