@@ -2,7 +2,7 @@
   "words": [
     {
       "word": "house",
-      "hint": "A place where you live",
+      "hint": "A place where you livesss",
       "id": 1
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "word": "thailand",
-      "hint": "Siam, Land of smile",
+      "hint": "Siam, Land of smiles",
       "id": 7
     },
     {
@@ -93,7 +93,7 @@
     {
       "id": 20,
       "word": "water",
-      "hint": "A drink"
+      "hint": "A pure, natural drink"
     },
     {
       "id": 21,
@@ -198,7 +198,47 @@
     {
       "id": 41,
       "word": "mario",
-      "hint": "A game character. He is "
+      "hint": "A game character. He is a man with red hat and mustache"
+    },
+    {
+      "id": 42,
+      "word": "apple",
+      "hint": "A red fruits"
+    },
+    {
+      "id": 43,
+      "word": "crab",
+      "hint": "An animal with eight legs"
+    },
+    {
+      "id": 44,
+      "word": "spider",
+      "hint": "An insect with eight legs"
+    },
+    {
+      "id": 45,
+      "word": "elephant",
+      "hint": "A big animal that has trunk"
+    },
+    {
+      "id": 46,
+      "word": "student",
+      "hint": "A jobs of the children who is studying"
+    },
+    {
+      "id": 47,
+      "word": "scissor",
+      "hint": "A sharp tool, mostly use for cutting the paper"
+    },
+    {
+      "id": 48,
+      "word": "hotel",
+      "hint": "The place you stay when you have a trip"
+    },
+    {
+      "id": 49,
+      "word": "blood",
+      "hint": "Red liquid in your body. Use in circulatory system"
     }
   ]
 }
