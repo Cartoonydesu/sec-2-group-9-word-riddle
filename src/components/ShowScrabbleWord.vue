@@ -22,7 +22,7 @@
     // PART game --------------------
     const inputWord = ref('')
     const matchWord = computed(() => {
-        return props.words.word === inputWord.value.toLocaleLowerCase
+        return props.words.word === inputWord.value.toLocaleLowerCase()
     })
  
     //PART countdown
@@ -49,7 +49,6 @@
     <button @click="($emit('reset'))" 
                 class="buttonRight"
                 style="font-size: 16px;">Reset</button>
-
     <div>
         <h2>
             <span v-for="letter in swapArrayOfWord" style="background-color: white;">
