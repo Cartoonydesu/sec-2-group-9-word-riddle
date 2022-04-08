@@ -82,7 +82,7 @@
 </script>
  
 <template>
-    <h2>Hangman Game (Views)</h2>
+    <h2>Hangman Game</h2>
     <!-- {{randomWord}} -->
     <!-- {{arrayOfword}} -->
     <ShowHangman 

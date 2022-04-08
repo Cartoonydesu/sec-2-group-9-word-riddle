@@ -4,8 +4,7 @@
  
 <template>
     <h2>About Us</h2>
-    <h4>Sec 2 group 9 : Word Riddle</h4>
-    <hr>
+    <h3>Sec 2 group 9 : Word Riddle</h3>
     <div>
         <p>63130500075 Panalee Palasri</p>
         <p>63130500084 Pornticha Sangmanee</p>

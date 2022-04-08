@@ -11,7 +11,7 @@
 </script>
  
 <template>
-    <h2>Scabble Word (views)</h2>
+    <h2>Scabble Word</h2>
     <!-- <Scabble :words="store"/> -->
 </template>
  

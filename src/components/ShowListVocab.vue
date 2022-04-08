@@ -28,40 +28,48 @@
             require:true
         }
     })
-    
+
     const searchingMode = computed(()=>{
         return props.keywords.length !== 0 ? true : false
     })
-    
-    
+
+    const showButton = computed(()=>{
+        return props.newWord.word.length === 0 || props.newWord.hint.length === 0 ? true : false
+    })
+
 </script>
  
 <template>
     <h2>Vocabulary</h2>
     <div>
-        <b>Add new Word</b><br>
-        <label for="word">word: </label>
+        
+        <label for="word"><b>word: </b></label>
         <input type="text" id="word" name="word" v-model="newWord.word">
-        <label for="hint"> hint: </label>
+        &nbsp;
+        <label for="hint"><b> hint: </b></label>
         <input type="text" id="hint" name="hint" v-model="newWord.hint"> 
-        <button @click="$emit('create',newWord)">Add</button>
+        &nbsp;
+        <button @click="$emit('create',newWord)" :disabled="showButton">Add new Word</button>
     </div>
     <br>
 
     <div>
         <b>Searching : </b>
         <input type="text" id="hint" name="hint" v-model="keywords">
+        &nbsp;
         <button @click="$emit('searching',keywords,searchingMode)">Search</button>
     </div>
-   <br>
-   <hr>
+    <br>
+    <hr>
 
     <center>
     <table id="vocabs">
         <tr>
-            <th>Word</th><th>Hint</th><th></th>
+            <th style="text-align: center;">Word</th>
+            <th style="text-align: center;">Hint</th>
+            <th></th>
         </tr>
-        <tr v-for="(word,index) in listWords" :key="index" v-if="searchingMode===false">
+        <tr v-for="(word,index) in listWords" :key="index" v-if="!searchingMode">
             <td>{{word.word}}</td>
             <td>{{word.hint}}</td>
             <td>
@@ -70,7 +78,7 @@
                 <button @click="$emit('delete',word.id)">Delete</button>
             </td>
         </tr>
-        <tr v-for="word in setWordSearch" v-else="searchingMode===true">
+        <tr v-for="word in setWordSearch" v-else>
             <td>{{word.word}}</td>
             <td>{{word.hint}}</td>
             <td>
@@ -90,10 +98,10 @@
                     <h3>Word</h3>
                 </div>
                 <div class="modal-body">
-                    <label for="editWord">word:</label>
+                    <label for="editWord">word : </label>
                     <input type="text" id="editWord" name="editWord" v-model="editingWord.word">
                     <br> 
-                    <label for="editHint">hint:</label>
+                    <label for="editHint">hint : </label>
                     <input type="text" id="editHint" name="editHint" v-model="editingWord.hint"> 
                 </div>
                 <div class="modal-button">
@@ -103,7 +111,6 @@
             </div>
         </div>
     </div>
-
 </template>
  
 <style scoped>
@@ -124,7 +131,7 @@
     #vocabs tr:nth-child(odd){background-color: #ffffff;}
 
     #vocabs tr:hover:not([disabled]) {
-            background-color: #fff7ce;
+            background-color: #ffcf73;
             color: black;
     }
 
@@ -134,30 +141,7 @@
         text-align: left;
         background-color: #6667ab;
         color: white;
-    }
-                                                                                                                                            
-    /* The Modal (background) */
- /* .modal {
-    display: none;
-    position: fixed;
-    z-index: 9998; 
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4); 
-
-    /* Modal Content */
-    /* .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    } */
+    }                                                                                                                                      
 
     /* The Close Button */
     .close {
@@ -178,17 +162,18 @@
     .modal-mask {
         display: none;
         position: fixed;
-        z-index: 9998;
+        /* z-index: 9998; */
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        display: table;
+        /* display: table; */
         transition: opacity 0.3s ease;
     }
     .modal-wrapper {
-        display: table-cell;
+        /* display: table-cell; */
+        margin-top: 15em;
         vertical-align: middle; 
     }
     .modal-container {
@@ -197,8 +182,7 @@
         background-color: #fff;
         border-radius: 2px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-        margin-top: 30%;
-        margin-left: 10%;
+        margin: auto;
     }
     .modal-header h3 {
         color: rgb(0, 0, 0);
