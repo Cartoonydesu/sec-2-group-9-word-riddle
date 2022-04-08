@@ -22,7 +22,7 @@
     // PART game --------------------
     const inputWord = ref('')
     const matchWord = computed(() => {
-        return props.words.word === inputWord.value
+        return props.words.word === inputWord.value.toLocaleLowerCase
     })
  
     //PART countdown
