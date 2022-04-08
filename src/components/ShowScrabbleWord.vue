@@ -32,7 +32,7 @@
     const showHint = ref(false)
 
     function countDown(){  
-        if(timeLeft.value==20) showHint.value = true
+        if(timeLeft.value==30) showHint.value = true
         if(timeLeft.value<= 0) timeOut.value = true
         else if(!matchWord.value) timeLeft.value --
 
@@ -51,7 +51,6 @@
                 style="font-size: 16px;">Reset</button>
 
     <div>
-        <h3>Scrabble the word : </h3>
         <h2>
             <span v-for="letter in swapArrayOfWord" style="background-color: white;">
                &nbsp; {{ letter }} &nbsp;
@@ -72,7 +71,7 @@
     </div>
 
     <div>
-        <input type="text" placeholder="Guess the word!" v-model="inputWord" :disabled="matchWord"/>
+        <input type="text" placeholder="Guess the word!" v-model="inputWord" :disabled="matchWord || timeLeft===0"/>
     </div>
 
     <div>

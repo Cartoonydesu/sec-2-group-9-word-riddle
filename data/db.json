@@ -2,7 +2,7 @@
   "words": [
     {
       "word": "house",
-      "hint": "A place where you livesss",
+      "hint": "A place where you live",
       "id": 1
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "word": "thailand",
-      "hint": "Siam, Land of smiles",
+      "hint": "Siam, Land of smile",
       "id": 7
     },
     {
@@ -38,7 +38,7 @@
     {
       "id": 9,
       "word": "clothes",
-      "hint": "fabric that human wear"
+      "hint": "fabric sheets that human wear"
     },
     {
       "id": 10,
@@ -63,7 +63,7 @@
     {
       "id": 14,
       "word": "youtube",
-      "hint": "A website for upload the video"
+      "hint": "A website for uploading the video"
     },
     {
       "id": 15,
@@ -153,7 +153,7 @@
     {
       "id": 32,
       "word": "medicine",
-      "hint": "A thing you have to eat when you fell ill"
+      "hint": "A thing you have to eat when you feel ill"
     },
     {
       "id": 33,
@@ -194,6 +194,11 @@
       "id": 40,
       "word": "glue",
       "hint": "A liquid used to stick two things together"
+    },
+    {
+      "id": 41,
+      "word": "mario",
+      "hint": "A game character. He is "
     }
   ]
 }

@@ -43,6 +43,8 @@
         console.log('error, cannot delete')
       }
     }
+    editingWord.value={}
+    setWordSearch.value = []
   }
 
 //EDITING MODE

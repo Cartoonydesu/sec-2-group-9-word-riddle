@@ -33,26 +33,31 @@
         return props.keywords.length !== 0 ? true : false
     })
 
-    const showButton = computed(()=>{
+    const showButtonAdd = computed(()=>{
         return props.newWord.word.length === 0 || props.newWord.hint.length === 0 ? true : false
+    })
+
+    const showButtonSave = computed(()=>{
+        return props.editingWord.word.length === 0 || props.editingWord.hint.length === 0 ? true : false
     })
 
 </script>
  
 <template>
     <h2>Vocabulary</h2>
+    <!-- ส่วนของ Add New Word -->
     <div>
-        
         <label for="word"><b>word: </b></label>
         <input type="text" id="word" name="word" v-model="newWord.word">
         &nbsp;
         <label for="hint"><b> hint: </b></label>
         <input type="text" id="hint" name="hint" v-model="newWord.hint"> 
         &nbsp;
-        <button @click="$emit('create',newWord)" :disabled="showButton">Add new Word</button>
+        <button @click="$emit('create',newWord)" :disabled="showButtonAdd">Add New Word</button>
     </div>
     <br>
 
+    <!-- ส่วนของ Searching -->
     <div>
         <b>Searching : </b>
         <input type="text" id="hint" name="hint" v-model="keywords">
@@ -62,6 +67,7 @@
     <br>
     <hr>
 
+    <!-- ส่วนของตารางคำศัพท์ -->
     <center>
     <table id="vocabs">
         <tr>
@@ -73,7 +79,6 @@
             <td>{{word.word}}</td>
             <td>{{word.hint}}</td>
             <td>
-                <!-- <button @click="edit(word)">Edit</button> -->
                 <button @click="$emit('edit',word)">Edit</button>
                 <button @click="$emit('delete',word.id)">Delete</button>
             </td>
@@ -89,6 +94,7 @@
     </table>
     </center>
 
+    <!-- ส่วนของ editing word modal  -->
     <div class="modal-mask" v-if="modalShow" style="display:block">
         <div class="modal-wrapper">
             <!-- Modal content -->
@@ -105,7 +111,7 @@
                     <input type="text" id="editHint" name="editHint" v-model="editingWord.hint"> 
                 </div>
                 <div class="modal-button">
-                    <button @click="$emit('update',editingWord)">Save</button>
+                    <button @click="$emit('update',editingWord)" :disabled="showButtonSave">Save</button>
                     <button @click="$emit('showHideModal')">Cancel</button>
                 </div>
             </div>
