@@ -12,7 +12,7 @@
         </div>
         <div class="grid-item">
             <router-link :to="{name:'ScrabbleWord'}">
-            <img src="../assets/scrabble.png" width="250" >
+            <img src="../assets/logo-scrabbleword.png" width="250" >
         </router-link>
         </div>
     </div> 
@@ -20,11 +20,11 @@
  
 <style scoped>
  .grid-container {
-  margin: auto 20%;
+  margin: auto 30%;
   display: grid;
   grid-template-columns: auto auto;
   /* background-color: #2196F3; */
-  padding: 10px;
+  padding: 5px;
   column-gap: 20px;
   row-gap: 20px;
 }
