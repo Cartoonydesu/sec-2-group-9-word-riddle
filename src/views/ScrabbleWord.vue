@@ -39,7 +39,7 @@
  
 <template>
     <h2>Scabble Word</h2>
-
+    
     <ShowScrabbleWord 
         :words="randomWord"
         :arrayOfWord="arrayOfWord"

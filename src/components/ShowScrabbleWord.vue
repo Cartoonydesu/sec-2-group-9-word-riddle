@@ -18,8 +18,6 @@
 
     })
 
-    console.log(props.words)
-    console.log(props.arrayOfWord)   
 
     // PART game --------------------
     const inputWord = ref('')

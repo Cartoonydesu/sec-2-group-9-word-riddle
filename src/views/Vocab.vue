@@ -4,7 +4,7 @@
   import { ref,computed,onMounted } from 'vue'
   
   const store = useWords()
-  const listAllWords = ref()
+  const listAllWords = ref([])
   onMounted(async () => {
     await store.getWords()
     listAllWords.value = store.listWords
@@ -12,7 +12,7 @@
 
 
   //CREATE
-  const createWord = ref({})
+  const createWord = ref({word: "", hint: ""})
   const addNewWord = async (newWord)=>{
       const res = await fetch(' http://localhost:5000/words',{
       method:'POST',
@@ -28,9 +28,8 @@
     }else {
       console.log('error, cannot create')
     }
-      createWord.value = {} 
-  } 
-
+      createWord.value = {word: "", hint: ""}
+  }
   //DELETE
   const removeWord = async (wordId)=>{
     if (confirm("Are you sure you want to delete this word?") == true) {
@@ -108,7 +107,7 @@ const edit = (word)=>{
       :modalShow="modalShow"
       :keywords="keywords"
       :setWordSearch="setWordSearch"
- 
+
       @create="addNewWord"
       @delete="removeWord"
       @edit="edit"

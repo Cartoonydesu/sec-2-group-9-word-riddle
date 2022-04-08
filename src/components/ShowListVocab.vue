@@ -3,89 +3,73 @@
     defineEmits(['create','delete','edit','showHideModal','update','searching'])
     const props = defineProps({
         listWords:{
-        type: Object,
-        require: true
+            type: Object,
+            require: true
         },
         newWord:{
-        type: Object,
-        defualt:{word:"",hint:""}
+            type: Object,
+            defualt:{}
         },
         editingWord:{
-        type: Object,
-        defualt:{word:"",hint:""}
+            type: Object,
+            defualt:{}
         },
         modalShow:{
-        type: Boolean,
-        require: true
+            type: Boolean,
+            require: true
         }
         ,
         keywords:{
-        type: String,
-        require: true
+            type: String,
+            require: true
         },
         setWordSearch:{
-        type: Array,
-        require:true
+            type: Object,
+            require:true
         }
-        // ,
-        // searchingMode:{
-        // type: Boolean,
-        // require: true    
-        // }
     })
-    
-    // const editingWord = ref("")
-    // const modalShow = ref(false)
-    // const edit = (word)=>{
-    //     showHideModal()
-    //     editingWord.value = {...word}
-    // }
-    // const showHideModal = () => modalShow.value===true ? modalShow.value = false : modalShow.value = true
-    
+
     const searchingMode = computed(()=>{
         return props.keywords.length !== 0 ? true : false
     })
-    
-// const keywords = ref("")
-// const setWordSearch = ref([])
-// const searching = computed(async () => {    
-//   if(keywords.value.length !== 0){
-//     const res = await fetch(`http://localhost:5000/words?q=${keywords.value}`)
-//     if (res.status === 200) {
-//         setWordSearch.value = await res.json()
-//         console.log(setWordSearch.value)
-//     } else console.log('error, cannot searching')
-//   }else{
-//     setWordSearch.value = []
-//   }
-//   return setWordSearch.value
-// })
+
+    const showButton = computed(()=>{
+        return props.newWord.word.length === 0 || props.newWord.hint.length === 0 ? true : false
+    })
+
 </script>
  
 <template>
     <h2>Vocabulary</h2>
     <div>
-        <b>Add new Word</b><br>
-        <label for="word">word: </label>
+        
+        <label for="word"><b>word: </b></label>
         <input type="text" id="word" name="word" v-model="newWord.word">
-        <label for="hint"> hint: </label>
+        &nbsp;
+        <label for="hint"><b> hint: </b></label>
         <input type="text" id="hint" name="hint" v-model="newWord.hint"> 
-        <button @click="$emit('create',newWord)">Add</button>
+        &nbsp;
+        <button @click="$emit('create',newWord)" :disabled="showButton">Add new Word</button>
     </div>
     <br>
+
     <div>
-        <b>Searching</b><br>
+        <b>Searching : </b>
         <input type="text" id="hint" name="hint" v-model="keywords">
+        &nbsp;
         <button @click="$emit('searching',keywords,searchingMode)">Search</button>
     </div>
-   <br><hr>
+    <br>
+    <hr>
 
     <center>
     <table id="vocabs">
         <tr>
-            <th>Word</th><th>Hint</th><th></th>
+            <th style="text-align: center;">Word</th>
+            <th style="text-align: center;">Hint</th>
+            <th></th>
         </tr>
-        <tr v-for="(word,index) in listWords" :key="index" v-if="searchingMode===false">
+        <tr v-for="(word,index) in listWords" :key="index" v-if="!searchingMode">
             <td>{{word.word}}</td>
             <td>{{word.hint}}</td>
             <td>
@@ -94,7 +78,7 @@
                 <button @click="$emit('delete',word.id)">Delete</button>
             </td>
         </tr>
-        <tr v-for="word in setWordSearch" v-else="searchingMode===true">
+        <tr v-for="word in setWordSearch" v-else>
             <td>{{word.word}}</td>
             <td>{{word.hint}}</td>
             <td>
@@ -102,40 +86,40 @@
                 <button @click="$emit('delete',word.id)">Delete</button>
             </td>
         </tr>
-        
     </table>
     </center>
 
     <div class="modal-mask" v-if="modalShow" style="display:block">
-    <div class="modal-wrapper">
-    <!-- Modal content -->
-    <div class="modal-container">
-        <span class="close" @click="$emit('showHideModal')">&times;</span>
-        <div class="modal-header"><h3>Edit Word</h3></div>
-        <div class="modal-body">
-            <label for="editWord">word:</label>
-            <input type="text" id="editWord" name="editWord" v-model="editingWord.word">
-            <br> 
-            <label for="editHint">hint:</label>
-            <input type="text" id="editHint" name="editHint" v-model="editingWord.hint"> 
+        <div class="modal-wrapper">
+            <!-- Modal content -->
+            <div class="modal-container">
+                <span class="close" @click="$emit('showHideModal')">&times;</span>
+                <div class="modal-header">
+                    <h3>Word</h3>
+                </div>
+                <div class="modal-body">
+                    <label for="editWord">word : </label>
+                    <input type="text" id="editWord" name="editWord" v-model="editingWord.word">
+                    <br> 
+                    <label for="editHint">hint : </label>
+                    <input type="text" id="editHint" name="editHint" v-model="editingWord.hint"> 
+                </div>
+                <div class="modal-button">
+                    <button @click="$emit('update',editingWord)">Save</button>
+                    <button @click="$emit('showHideModal')">Cancel</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-button">
-            <button @click="$emit('update',editingWord)">Save</button>
-            <button @click="$emit('showHideModal')">Cancel</button>
-        </div>
     </div>
-    </div>
-    </div>
-
 </template>
  
-<style>
+<style scoped>
 
     /* ------table-------*/
     #vocabs {
         font-family: 'Itim', cursive;
         border-collapse: collapse;
-        width: 75%;
+        width: auto;
     }
 
     #vocabs td, #vocabs th {
@@ -147,7 +131,7 @@
     #vocabs tr:nth-child(odd){background-color: #ffffff;}
 
     #vocabs tr:hover:not([disabled]) {
-            background-color: #fff7ce;
+            background-color: #ffcf73;
             color: black;
     }
 
@@ -157,81 +141,66 @@
         text-align: left;
         background-color: #6667ab;
         color: white;
-    }
-                                                                                                                                            
-    /* The Modal (background) */
-    .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 9998; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-
-    /* Modal Content */
-    .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    }
+    }                                                                                                                                      
 
     /* The Close Button */
     .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
     }
 
     .close:hover,
     .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
     }
+    
     /** ---------modal 2----------- */
     .modal-mask {
-    display: none;
-    position: fixed;
-    z-index: 9998;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: table;
-    transition: opacity 0.3s ease;
+        display: none;
+        position: fixed;
+        /* z-index: 9998; */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* display: table; */
+        transition: opacity 0.3s ease;
     }
     .modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
+        /* display: table-cell; */
+        margin-top: 15em;
+        vertical-align: middle; 
     }
     .modal-container {
-    width: 300px;
-    margin: 0px auto;
-    padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+        width: 300px;
+        padding: 20px 30px;
+        background-color: #fff;
+        border-radius: 2px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+        margin: auto;
     }
     .modal-header h3 {
-    margin-top: 0;
-    color: rgb(0, 0, 0);
+        color: rgb(0, 0, 0);
     }
     .modal-body {
-    margin: 20px 0;
+        margin: 20px 0;
     }
     .modal-button {
-    display: flex;
-    justify-content: end;
+        display: flex;
+        justify-content: end;
     }
-
+    button {
+        font-family: 'Itim', cursive;
+        background-color: #f8c1cc;
+        border-radius: 10px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+        padding: 10px;
+        margin: 4px;
+        border: 3px #000;
+    }
 </style>
