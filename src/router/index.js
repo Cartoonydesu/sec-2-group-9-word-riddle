@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Vocab from '../views/Vocab.vue'
-import EditWord from '../views/EditWord.vue'
 import AboutUs from '../views/AboutUs.vue'
 import Hangman from '../views/Hangman.vue'
 import ScrabbleWord from '../views/ScrabbleWord.vue'
@@ -34,11 +33,6 @@ const routes = [
         path:'/scrabble-word',
         name: 'ScrabbleWord',
         component: ScrabbleWord
-    },
-    {
-        path:'/vocab/:wordId',
-        name: 'EditWord',
-        component: EditWord
     },
     {
         path:'/about-us',

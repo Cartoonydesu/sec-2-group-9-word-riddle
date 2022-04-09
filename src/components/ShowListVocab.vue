@@ -1,5 +1,5 @@
 <script setup>
-    import {ref,computed} from 'vue'
+    import {computed} from 'vue'
     defineEmits(['create','delete','edit','showHideModal','update','searching'])
     const props = defineProps({
         listWords:{

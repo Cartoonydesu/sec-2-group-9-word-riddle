@@ -1,7 +1,7 @@
 <script setup>
   import ShowListVocabVue from '../components/ShowListVocab.vue';
   import { useWords } from '../stores/listAllWords.js'
-  import { ref,computed,onMounted } from 'vue'
+  import { ref,onMounted } from 'vue'
   
   const store = useWords()
   const listAllWords = ref([])
@@ -30,6 +30,7 @@
     }
       createWord.value = {word: "", hint: ""}
   }
+  
   //DELETE
   const removeWord = async (wordId)=>{
     if (confirm("Are you sure you want to delete this word?") == true) {
@@ -86,13 +87,14 @@ const edit = (word)=>{
   const keywords = ref("")
   const setWordSearch = ref([])
   const searching = async (keyword,searchingMode) => { 
-    if(searchingMode===true){
+    if(searchingMode===true && keyword != 0 ){
       const res = await fetch(`http://localhost:5000/words?q=${keyword}`)
       if (res.status === 200) {
           setWordSearch.value = await res.json()
           keywords.value = keyword
       } else console.log('error, cannot searching')
     }else{
+      keywords.value = ""
       setWordSearch.value = []
       console.log("Couldn't find this search.")
     }

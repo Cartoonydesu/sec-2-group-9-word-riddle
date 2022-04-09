@@ -1,5 +1,5 @@
 import { defineStore,acceptHMRUpdate } from 'pinia';
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 export const useWords = defineStore('listAllWords', () => {
   const listWords = ref([])
   const getWords = async () => {
